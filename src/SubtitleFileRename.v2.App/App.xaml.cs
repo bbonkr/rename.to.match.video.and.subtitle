@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 
 using SubtitleFileRename.Services;
+using SubtitleFileRename.v2.App.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,9 @@ namespace SubtitleFileRename.v2.App
                 .AddLogging(builder => builder.AddConsole())
                 .AddScoped<RenameService>()
                 ;
+
+            // add ViewModels
+            services.AddSingleton<MainWindowViewModel>();
 
             services.AddSingleton<MainWindow>();
         }

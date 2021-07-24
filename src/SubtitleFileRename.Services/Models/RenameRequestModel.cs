@@ -21,9 +21,11 @@ namespace SubtitleFileRename.Services.Models
 
         public ContentType ContentType { get; set; }
 
+        public bool IsPrimary { get; set; }
+
         public override string ToString()
         {
-            return $"{ContentType}: {Key}";
+            return $"{ContentType}: {Key}: {IsPrimary}";
         }
     }
 

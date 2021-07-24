@@ -18,12 +18,14 @@ namespace SubtitleFileRename.Services
         }
 
         public Task<RenameRequestModel> LoadFilesAsync(IEnumerable<FileInfo> files)
-        {            
+        {
             var targetFiles = files.Select(x => MapFromFileInfoToTargetFile(x))
                 .GroupBy(x => x.Extension)
-                .ToDictionary(x => new GroupKey { 
-                    Key=  x.Key ,
-                    ContentType = GetContentType(x.Key)
+                .ToDictionary(x => new GroupKey
+                {
+                    Key = x.Key,
+                    ContentType = GetContentType(x.Key).contentType,
+                    IsPrimary = GetContentType(x.Key).isPrimary,
                 }, x => x.Select(y => y).OrderBy(y => y.Name).ToArray());
 
             return Task.FromResult(new RenameRequestModel
@@ -248,19 +250,19 @@ namespace SubtitleFileRename.Services
             }
         }
 
-        private ContentType GetContentType(string extension)
+        private (ContentType contentType, bool isPrimary) GetContentType(string extension)
         {
             switch (extension.ToLower())
             {
                 case ".mp4":
                 case ".mkv":
                 case ".avi":
-                    return ContentType.Video;
+                    return (ContentType.Video, true);
                 case ".smi":
                 case ".srt":
-                    return ContentType.Subtitle;
+                    return (ContentType.Subtitle, false);
                 default:
-                    return ContentType.Unknown;
+                    return (ContentType.Unknown, false);
             }
         }
 

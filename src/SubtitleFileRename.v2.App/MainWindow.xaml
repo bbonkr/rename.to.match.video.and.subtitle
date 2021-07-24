@@ -5,8 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SubtitleFileRename.v2.App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="{Binding Title}" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="DefaultButtonStyle" TargetType="Button">
+                <Setter Property="Padding" Value="9, 3, 9, 3" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="DefaultStackPanelStyle" TargetType="StackPanel">
+                <Setter Property="Margin" Value="9,3,9,3"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid x:Name="mainLayoutGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
 
+        <!-- Open files button -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Style="{StaticResource DefaultStackPanelStyle}">
+            <Button Content="Open files" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource DefaultButtonStyle}" x:Name="button" Command="{Binding OpenFileCommand}" />
+        </StackPanel>
+        
+        <!-- Rename pattern -->
+        <Grid Grid.Row="1" Margin="9, 0, 9, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            
+            <Label Content="Rename pattern" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" />
+            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="9,3,9,3" Grid.Column="1" Grid.Row="0" Text="{Binding Pattern}" />
+            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="9,3,9,3" Grid.Column="2" Grid.Row="0" Text="{Binding Replacement}" />
+        </Grid>
+
+        <!-- funtional buttons -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Style="{StaticResource DefaultStackPanelStyle}">
+            <Button Content="Preview" Style="{StaticResource DefaultButtonStyle}" Margin="0, 0, 6, 0" x:Name="button2" Command="{Binding PreviewCommand}" />
+            <Button Content="Rename" Style="{StaticResource DefaultButtonStyle}" Margin="0, 0, 6, 0" Command="{Binding RenameCommand}" />
+            <Button Content="Restore" Style="{StaticResource DefaultButtonStyle}" Margin="0, 0, 6, 0" Command="{Binding RestoreCommand}" />
+        </StackPanel>
     </Grid>
 </Window>
