@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubtitleFileRename", "src\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleFileRename.Services", "src\SubtitleFileRename.Services\SubtitleFileRename.Services.csproj", "{1945ECA6-9803-4148-B9DA-1D2F1EE18520}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleFileRename.v2.App", "src\SubtitleFileRename.v2.App\SubtitleFileRename.v2.App.csproj", "{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{1945ECA6-9803-4148-B9DA-1D2F1EE18520}.Release|x64.Build.0 = Release|Any CPU
 		{1945ECA6-9803-4148-B9DA-1D2F1EE18520}.Release|x86.ActiveCfg = Release|Any CPU
 		{1945ECA6-9803-4148-B9DA-1D2F1EE18520}.Release|x86.Build.0 = Release|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Debug|x64.Build.0 = Debug|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Release|x64.ActiveCfg = Release|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Release|x64.Build.0 = Release|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
