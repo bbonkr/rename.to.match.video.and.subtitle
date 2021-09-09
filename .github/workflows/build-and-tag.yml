@@ -26,10 +26,13 @@ jobs:
           $xml = [Xml] (Get-Content src/SubtitleFileRename.Services/SubtitleFileRename.Services.csproj)
           $version = [Version] $xml.Project.PropertyGroup.Version
           echo "::set-output name=version::$version"
+          echo "PACKAGE_VERSION=$version" >> $GITHUB_ENV
         id: get_package_version
 
-      - name: set-version  
-        run: echo "PACKAGE_VERSION=${{ steps.get_package_version.outputs.version }}" >> $GITHUB_ENV
+      # - name: set-version  
+      #   run: |
+      #     echo "PACKAGE_VERSION=${{ steps.get_package_version.outputs.version }}" >> $GITHUB_ENV
+      #     echo "$GITHUB_ENV"
 
       - name: package-version-to-git-tag
         uses: pkgdeps/git-tag-action@v2
