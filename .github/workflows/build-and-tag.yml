@@ -26,7 +26,7 @@ jobs:
           $xml = [Xml] (Get-Content src/SubtitleFileRename.Services/SubtitleFileRename.Services.csproj)
           $version = [Version] $xml.Project.PropertyGroup.Version
           echo "::set-output name=version::$version"
-          echo "PACKAGE_VERSION=$version" >> $GITHUB_ENV
+          echo "PACKAGE_VERSION=$version" >> $env:GITHUB_ENV
         id: get_package_version
 
       # - name: set-version  
