@@ -26,7 +26,7 @@ jobs:
           $xml = [Xml] (Get-Content src/SubtitleFileRename.Services/SubtitleFileRename.Services.csproj)
           $version = [Version] $xml.Project.PropertyGroup.Version
           echo "::set-output name=version::$version"
-          echo "PACKAGE_VERSION=$version" >> $env:GITHUB_ENV
+          echo "::debug::{version=$version}"
         id: get_package_version
 
       # - name: set-version  
@@ -39,7 +39,7 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           github_repo: ${{ github.repository }}
-          version: ${{ env.PACKAGE_VERSION }}
+          version: ${{ steps.get_package_version.outputs.version }}
           git_commit_sha: ${{ github.sha }}
           git_tag_prefix: "v"
 
