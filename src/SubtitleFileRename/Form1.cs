@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,25 @@ namespace SubtitleFileRename
             this.logger = logger;
 
             InitializeComponent();
+
+            Load += (s, e) =>
+            {
+                if (s is Form thisControl)
+                {
+                    var name = s.GetType().Assembly.GetManifestResourceNames().Where(x => x.EndsWith("icon.png")).FirstOrDefault();
+                    if (!string.IsNullOrWhiteSpace(name))
+                    {
+                        using (var stream = s.GetType().Assembly.GetManifestResourceStream(name))
+                        {
+                            var bitmap = (Bitmap)Bitmap.FromStream(stream);
+                            var iconHandle = bitmap.GetHicon();
+
+                            thisControl.Icon = Icon.FromHandle(iconHandle);
+                            stream.Close();
+                        }
+                    }
+                }
+            };
 
             openFileButton.Click += OpenFileButton_Click;
 
@@ -196,10 +216,10 @@ namespace SubtitleFileRename
             }
         }
 
-        private ListView CreateListView(KeyValuePair<GroupKey, TargetFile[]>  item)
+        private ListView CreateListView(KeyValuePair<GroupKey, TargetFile[]> item)
         {
             var listView = new ListView();
-            
+
             listView.BeginUpdate();
 
             listView.Name = $"listView_{item.Key.Key}";
@@ -259,7 +279,7 @@ namespace SubtitleFileRename
             foreach (var value in item.Value)
             {
                 var listitem = new ListViewItem(value.Name);
-                
+
                 listitem.SubItems.Add(value.Extension);
                 listitem.SubItems.Add(value.Path);
                 listitem.SubItems.Add(value.CandidateName);
@@ -286,11 +306,11 @@ namespace SubtitleFileRename
         {
             var movieFiles = model.Files.Where(x => x.Key.ContentType == ContentType.Video).FirstOrDefault();
 
-            if(movieFiles.Key != null)
+            if (movieFiles.Key != null)
             {
-                foreach(Control control in tableLayoutPanel1.Controls)
+                foreach (Control control in tableLayoutPanel1.Controls)
                 {
-                    if(control is ListView listView)
+                    if (control is ListView listView)
                     {
                         if (listView.Name.EndsWith(movieFiles.Key.Key))
                         {
@@ -300,9 +320,9 @@ namespace SubtitleFileRename
                 }
             }
 
-            foreach(var files in model.Files.Where(x => x.Key.ContentType != ContentType.Video))
+            foreach (var files in model.Files.Where(x => x.Key.ContentType != ContentType.Video))
             {
-                if(files.Key != null)
+                if (files.Key != null)
                 {
                     foreach (Control control in tableLayoutPanel1.Controls)
                     {

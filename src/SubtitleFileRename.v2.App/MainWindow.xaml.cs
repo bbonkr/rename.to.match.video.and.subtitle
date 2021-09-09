@@ -108,7 +108,7 @@ namespace SubtitleFileRename.v2.App
             {
                 DisplayMemberBinding = new Binding(nameof(TargetFile.Name)),
                 Header = "File name",
-                Width =  double.NaN,
+                Width =  double.NaN,                
             });
             gridView.Columns.Add(new GridViewColumn
             {

@@ -15,7 +15,14 @@ Rename: Filename match between Video and subtitle
 
 ## Build executable application
 
+### WinForms app
+
 ```powershell
 PS> dotnet publish --output out --configuration Release src/SubtitleFileRename
 ```
 
+### WPF app
+
+```powershell
+PS> dotnet publish --output out --configuration Release src/SubtitleFileRename.v2.App
+```

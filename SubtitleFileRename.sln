@@ -5,9 +5,14 @@ VisualStudioVersion = 17.0.31512.422
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubtitleFileRename", "src\SubtitleFileRename\SubtitleFileRename.csproj", "{37A5043E-F075-4910-9558-F10945D802D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleFileRename.Services", "src\SubtitleFileRename.Services\SubtitleFileRename.Services.csproj", "{1945ECA6-9803-4148-B9DA-1D2F1EE18520}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubtitleFileRename.Services", "src\SubtitleFileRename.Services\SubtitleFileRename.Services.csproj", "{1945ECA6-9803-4148-B9DA-1D2F1EE18520}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleFileRename.v2.App", "src\SubtitleFileRename.v2.App\SubtitleFileRename.v2.App.csproj", "{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubtitleFileRename.v2.App", "src\SubtitleFileRename.v2.App\SubtitleFileRename.v2.App.csproj", "{8B182DAD-B2E3-4579-B939-6F4D4844FBC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5A81AA55-52D6-4F31-A48D-B162F4D1CA3F}"
+	ProjectSection(SolutionItems) = preProject
+		icon.png = icon.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
