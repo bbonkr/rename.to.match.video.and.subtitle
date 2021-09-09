@@ -10,7 +10,7 @@ Rename: Filename match between Video and subtitle
 
 ## Environment
 
-* Windows 10 x64
+* Windows 10+ x64
 
 
 ## Build executable application

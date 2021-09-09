@@ -1,0 +1,42 @@
+name: "Release"
+
+on:
+  repository_dispatch:
+    types: [upload-assets]
+
+jobs:
+  Release:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+    steps:
+      - name: Context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Verify Upload Url
+        run: echo ${{ github.event.client_payload }}
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: publish WinForms app
+        run: dotnet publish --output out --configuration Release src/SubtitleFileRename
+
+      - name: publish WFP app
+        run: dotnet publish --output out --configuration Release src/SubtitleFileRename.v2.App
+
+      - name: Upload Assets to Release with a wildcard
+        uses: csexton/release-asset-action@v2
+        with:
+          pattern: "out/*"
+          github-token: ${{ secrets.GH_TOKEN }}
+          release-url: ${{ github.event.client_payload.url }}      

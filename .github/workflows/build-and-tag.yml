@@ -1,0 +1,49 @@
+name: Build and tag
+on:
+  push:
+    branches:
+      - main # Default release branch
+jobs:
+  BuildAndTag:
+    name: build and tag
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
+
+      - name: package-version
+        run: grep '<Version>' < src/SubtitleFileRename.Services/SubtitleFileRename.Services.csproj | echo "::set-output name=version::$(sed 's/.*<Version>\(.*\)<\/Version>/\1/')"
+        id: get_package_version
+
+      - name: set-version  
+        run: echo "PACKAGE_VERSION=${{ steps.get_package_version.outputs.version }}" >> $GITHUB_ENV
+
+      - name: Release Drafter
+        id: release_drafter
+        uses: release-drafter/release-drafter@v5
+        with:
+          config-name: release-drafter.yml
+          version: ${{ env.PACKAGE_VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Check Upload Url
+        run: echo ${{ steps.release_drafter.outputs.upload_url }}
+
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          repository: bbonkr/rename.to.match.video.and.subtitle
+          event-type: upload-assets
+          client-payload: '{ "url": "${{ steps.release_drafter.outputs.upload_url }}" }'
