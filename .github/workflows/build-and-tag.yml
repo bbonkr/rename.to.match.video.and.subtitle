@@ -22,7 +22,10 @@ jobs:
         run: dotnet build --no-restore
 
       - name: package-version
-        run: grep '<Version>' < src/SubtitleFileRename.Services/SubtitleFileRename.Services.csproj | echo "::set-output name=version::$(sed 's/.*<Version>\(.*\)<\/Version>/\1/')"
+        run: |
+          $xml = [Xml] (Get-Content src/SubtitleFileRename.Services/SubtitleFileRename.Services.csproj)
+          $version = [Version] $xml.Project.PropertyGroup.Version
+          echo "::set-output name=version::$version"
         id: get_package_version
 
       - name: set-version  
