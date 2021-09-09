@@ -48,12 +48,12 @@ jobs:
         uses: release-drafter/release-drafter@v5
         with:
           config-name: release-drafter.yml
-          version: ${{ env.PACKAGE_VERSION }}
+          version: ${{ steps.get_package_version.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Check Upload Url
-        run: echo ${{ steps.release_drafter.outputs.upload_url }}
+        run: echo "${{ steps.release_drafter.outputs.upload_url }}"
 
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1
